@@ -1,100 +1,51 @@
-package com.example.hackathon.csc7054project;
+package com.example.hackathon.loginappassignment2;
 
-
-
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
 
 public class MainActivity extends AppCompatActivity {
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        //start of the app lifecycle
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //public buttons and text views
-        final Button left1 = (Button) findViewById(R.id.button_left);
-        final Button right1 = (Button) findViewById(R.id.button_right);
-        final Button display_user_text = (Button) findViewById(R.id.button_display);
-        final TextView tv = (TextView) findViewById(R.id.textingview);
-        final Button speak = (Button) findViewById(R.id.button_speak);
-
-
-        //if the user clicks on the Display Input Button do this
-        display_user_text.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-
-
-                //Setting up the Toast element.
-                // This will print the text at the bottom of the screen, and then disappear after a while.
-                //Usually used for user alerts.
-                user_input = (EditText) findViewById(R.id.Users_Display);
-                Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 0);
-                toast.makeText(MainActivity.this, user_input.getText(), toast.LENGTH_LONG).show();
-
-                //this will set the text in the TextView to 'Hello world!"
-                // this is seperate from the Toast
-
-                tv.setText("Hello world");
-
-
-            }
-
-
-        });
-
-        left1.setOnClickListener(new View.OnClickListener() {
-            // If the user clicks on the "Left" button, do this.
-            @Override
-            public void onClick(View view) {
-                //placing text into the TextView
-                tv.setText("Hello world. This should move to the left.");
-                //moving above text to the left.
-                tv.setGravity(Gravity.BOTTOM | Gravity.LEFT);
-            }
-        });
-
-        right1.setOnClickListener(new View.OnClickListener() {
-            //If the user clicks on the "Right" button, do this.
-
-            @Override
-            public void onClick(View view) {
-                //placing text into the TextView
-                tv.setText("Hello world. This should move to the right.");
-                //moving above text to the right.
-                tv.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
-            }
-        });
-
-
-    }
-
-
-
-    // set up for Toast, the EditText needs to be private.
-    /*
-    Apart from the rest of the elements since Android Studio only allows
-    private elements in this section.
+    /**
+     * This is the MainActivity of the app.
+     * This serves as a front page where the user can pick from several options, Register or Login.
+     * @param savedInstanceState
      */
 
-    private EditText user_input;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) { //start of Activity lifecycle
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //setting up elements
+        Button loginbutton = (Button) findViewById(R.id.loginbutton); //Creating a button named loginbutton
+        Button registerButton = (Button) findViewById(R.id.registerbutton); //Creation a button named registerbutton
+        TextView userexplains = (TextView) findViewById(R.id.userexplains); // Creating a TextView named userexplains
+
+
+        //if user clicks on loginbutton do this
+        loginbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logintent = new Intent(MainActivity.this, LoginActivity.class); //creating a new Intent that will redirect the user to the LoginAcitivty
+                MainActivity.this.startActivity(logintent); //starting new Activity
+
+
+            }
+        });
+        //if user clicks on registerbutton do this
+        registerButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v){
+                Intent regintent = new Intent(MainActivity.this, RegisterActivity.class); //creating a new Intent that will redirect the user to the RegisterAcivity
+                MainActivity.this.startActivity(regintent); //starting new Activity
+
+            }
+        });
+
+    }
 }
-
-
-
-
-
 
